@@ -1,20 +1,15 @@
-#Concepts addressed (Directory, File Permission, Shell)
+#concepts addressed(shell, directories, prompt)
 
-~/command-line-1-4-WyattGracz$ cd playground
-bash: cd: playground: No such file or directory
-~/command-line-1-4-WyattGracz$ cd
+~/command-line-1-4-WyattGracz$ cd 
 ~$ mkdir playground
-mkdir: cannot create directory ‘playground’: File exists
 ~$ cd playground
 ~/playground$ mkdir dir1 dir2
-mkdir: cannot create directory ‘dir1’: File exists
-mkdir: cannot create directory ‘dir2’: File exists
 ~/playground$ cp /etc/passwd .
 ~/playground$ ls -l
 total 12
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:45 dir1
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:45 dir2
--rw-r--r-- 1 runner runner 1065 Feb  4 20:50 passwd
+drwxr-xr-x 2 runner runner 4096 Feb  9 20:54 dir1
+drwxr-xr-x 2 runner runner 4096 Feb  9 20:54 dir2
+-rw-r--r-- 1 runner runner 1065 Feb  9 20:55 passwd
 ~/playground$ cp -v /etc/passwd .
 '/etc/passwd' -> './passwd'
 ~/playground$ cp -i /etc/passwd .
@@ -27,10 +22,10 @@ cp: overwrite './passwd'? y
 ~/playground$ mv dir1 dir2
 ~/playground$ ls -l dir2
 total 4
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:52 dir1
+drwxr-xr-x 2 runner runner 4096 Feb  9 20:57 dir1
 ~/playground$ ls -l dir2/dir1
 total 4
--rw-r--r-- 1 runner runner 1065 Feb  4 20:51 fun
+-rw-r--r-- 1 runner runner 1065 Feb  9 20:56 fun
 ~/playground$ mv dir2/dir1 .
 ~/playground$ mv dir1/fun .
 ~/playground$ ln fun fun-hard
@@ -38,45 +33,59 @@ total 4
 ~/playground$ ln fun dir2/fun-hard
 ~/playground$ ls -l
 total 16
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:54 dir1
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:54 dir2
--rw-r--r-- 4 runner runner 1065 Feb  4 20:51 fun
--rw-r--r-- 4 runner runner 1065 Feb  4 20:51 fun-hard
+drwxr-xr-x 2 runner runner 4096 Feb  9 21:00 dir1
+drwxr-xr-x 2 runner runner 4096 Feb  9 21:00 dir2
+-rw-r--r-- 4 runner runner 1065 Feb  9 20:56 fun
+-rw-r--r-- 4 runner runner 1065 Feb  9 20:56 fun-hard
 ~/playground$ ls -li
 total 16
-1064450 drwxr-xr-x 2 runner runner 4096 Feb  4 20:54 dir1
-1064451 drwxr-xr-x 2 runner runner 4096 Feb  4 20:54 dir2
-1056180 -rw-r--r-- 4 runner runner 1065 Feb  4 20:51 fun
-1056180 -rw-r--r-- 4 runner runner 1065 Feb  4 20:51 fun-hard
+2889112 drwxr-xr-x 2 runner runner 4096 Feb  9 21:00 dir1
+3140057 drwxr-xr-x 2 runner runner 4096 Feb  9 21:00 dir2
+ 817528 -rw-r--r-- 4 runner runner 1065 Feb  9 20:56 fun
+ 817528 -rw-r--r-- 4 runner runner 1065 Feb  9 20:56 fun-hard
 ~/playground$ ln -s fun fun-sym
 ~/playground$ ln -s ../fun dir1/fun-sym
 ~/playground$ ln -s ../fun dir2/fun-sym
 ~/playground$ ls -l dir1
 total 4
--rw-r--r-- 4 runner runner 1065 Feb  4 20:51 fun-hard
-lrwxrwxrwx 1 runner runner    6 Feb  4 20:56 fun-sym -> ../fun
+-rw-r--r-- 4 runner runner 1065 Feb  9 20:56 fun-hard
+lrwxrwxrwx 1 runner runner    6 Feb  9 21:01 fun-sym -> ../fun
+~/playground$ ln -s /home/me/playground/fun dir1/fun-sym
+ln: failed to create symbolic link 'dir1/fun-sym': File exists
+~/playground$ ln -s dir1 dir1-sym
+~/playground$ ls -l
+total 16
+drwxr-xr-x 2 runner runner 4096 Feb  9 21:01 dir1
+lrwxrwxrwx 1 runner runner    4 Feb  9 21:04 dir1-sym -> dir1
+drwxr-xr-x 2 runner runner 4096 Feb  9 21:02 dir2
+-rw-r--r-- 4 runner runner 1065 Feb  9 20:56 fun
+-rw-r--r-- 4 runner runner 1065 Feb  9 20:56 fun-hard
+lrwxrwxrwx 1 runner runner    3 Feb  9 21:01 fun-sym -> fun
 ~/playground$ rm fun-hard
 ~/playground$ ls -l
 total 12
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:56 dir1
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:56 dir2
--rw-r--r-- 3 runner runner 1065 Feb  4 20:51 fun
-lrwxrwxrwx 1 runner runner    3 Feb  4 20:55 fun-sym -> fun
+drwxr-xr-x 2 runner runner 4096 Feb  9 21:01 dir1
+lrwxrwxrwx 1 runner runner    4 Feb  9 21:04 dir1-sym -> dir1
+drwxr-xr-x 2 runner runner 4096 Feb  9 21:02 dir2
+-rw-r--r-- 3 runner runner 1065 Feb  9 20:56 fun
+lrwxrwxrwx 1 runner runner    3 Feb  9 21:01 fun-sym -> fun
 ~/playground$ rm -i fun
 rm: remove regular file 'fun'? y
+~/playground$ ls-l
+bash: ls-l: command not found
 ~/playground$ ls -l
 total 8
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:56 dir1
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:56 dir2
-lrwxrwxrwx 1 runner runner    3 Feb  4 20:55 fun-sym -> fun
+drwxr-xr-x 2 runner runner 4096 Feb  9 21:01 dir1
+lrwxrwxrwx 1 runner runner    4 Feb  9 21:04 dir1-sym -> dir1
+drwxr-xr-x 2 runner runner 4096 Feb  9 21:02 dir2
+lrwxrwxrwx 1 runner runner    3 Feb  9 21:01 fun-sym -> fun
 ~/playground$ less fun-sym
 bash: less: command not found
 ~/playground$ rm fun-sym dir1-sym
-rm: cannot remove 'dir1-sym': No such file or directory
 ~/playground$ ls -l
 total 8
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:56 dir1
-drwxr-xr-x 2 runner runner 4096 Feb  4 20:56 dir2
+drwxr-xr-x 2 runner runner 4096 Feb  9 21:01 dir1
+drwxr-xr-x 2 runner runner 4096 Feb  9 21:02 dir2
 ~/playground$ cd
 ~$ rm -r playground
 ~$ exit
